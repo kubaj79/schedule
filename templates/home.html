@@ -1,0 +1,159 @@
+{% extends "layout.html" %}
+{% block body %}
+<div >
+  <h2>Plan Zajęć z dnia {{data}}</h2>
+  <p>Plan zajęć farmacja </p>
+
+  <script src="regexChecker.js" charset="UTF-8"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+
+    google.charts.load("current", {packages:["timeline"]});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+
+      var container = document.getElementById('example3.1');
+      var chart = new google.visualization.Timeline(container);
+      var dataTable = new google.visualization.DataTable();
+      dataTable.addColumn({ type: 'string', id: 'Position' });
+      dataTable.addColumn({ type: 'string', id: 'Name' });
+      dataTable.addColumn({ type: 'date', id: 'Start' });
+      dataTable.addColumn({ type: 'date', id: 'End' });
+
+
+      {%for d in dane %}
+      dataTable.addRows([
+        ['{{d[0]}}','{{d[2]}}-{{d[1]}}',new Date(0,0,0,{{d[3]}}),new Date(0,0,0,{{d[4]}})],
+        ]);
+      {%endfor%}
+      {%for k in komputerowa %}
+      dataTable.addRows([
+        ['{{k[0]}}','{{k[2]}}',new Date(0,0,0,{{k[3]}}),new Date(0,0,0,{{k[4]}})],
+        ]);
+      {%endfor%}
+      {%for d in aula2 %}
+      dataTable.addRows([
+        ['{{d[0]}}','{{d[2]}}',new Date(0,0,0,{{d[3]}}),new Date(0,0,0,{{d[4]}})],
+        ]);
+      {%endfor%}
+      {%for d in aula3 %}
+      dataTable.addRows([
+        ['{{d[0]}}','{{d[2]}}',new Date(0,0,0,{{d[3]}}),new Date(0,0,0,{{d[4]}})],
+        ]);
+      {%endfor%}
+      {%for d in aula4a %}
+      dataTable.addRows([
+        ['{{d[0]}}','{{d[2]}}',new Date(0,0,0,{{d[3]}}),new Date(0,0,0,{{d[4]}})],
+        ]);
+      {%endfor%}
+      {%for d in aula4b %}
+      dataTable.addRows([
+        ['{{d[0]}}','{{d[2]}}',new Date(0,0,0,{{d[3]}}),new Date(0,0,0,{{d[4]}})],
+        ]);
+      {%endfor%}
+      {%for d in sala45 %}
+      dataTable.addRows([
+        ['{{d[0]}}','{{d[2]}}',new Date(0,0,0,{{d[3]}}),new Date(0,0,0,{{d[4]}})],
+        ]);
+      {%endfor%}
+      {%for d in sala46%}
+      dataTable.addRows([
+        ['{{d[0]}}','{{d[2]}}',new Date(0,0,0,{{d[3]}}),new Date(0,0,0,{{d[4]}})],
+        ]);
+      {%endfor%}
+      {%for d in sala213%}
+      dataTable.addRows([
+        ['{{d[0]}}','{{d[2]}}',new Date(0,0,0,{{d[3]}}),new Date(0,0,0,{{d[4]}})],
+        ]);
+      {%endfor%}
+      {%for d in sala214%}
+      dataTable.addRows([
+        ['{{d[0]}}','{{d[2]}}',new Date(0,0,0,{{d[3]}}),new Date(0,0,0,{{d[4]}})],
+        ]);
+      {%endfor%}
+    
+      chart.draw(dataTable);
+    }
+  </script>
+
+  <div id="example3.1" style="height: 2000px;"></div>
+  <!--
+  <table class="table">
+    <thead>
+      <tr class="active">
+        <th>Nr Auli</th>
+        {% for g in dane %}
+          <th>{{g}}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+      <tbody >
+      <tr>
+        <th class="active">Aula 1</th>
+        <td bgcolor="#b3e0ff" colspan="8">Wykład Biofarmacja 8:00-11:45 </td>
+        <td bgcolor="#b3e0ff" colspan="4">Wykład Biofarmacja 12:00-13:45 </td>
+        <td bgcolor="#b3e0ff" colspan="6">Wykład Biofarmacja 14:00-15:30</td>
+        <td colspan="6"> </td>
+
+      </tr>
+      <tr>
+        <th class="active">Aula 2</th>
+        <td colspan="2"></td>
+        <td bgcolor="#99ffd6" colspan="6">Wykład Biofarmacja 9:00-11:45 </td>
+        <td colspan="2"></td>
+        <td bgcolor="#99ffd6" colspan="6">Wykład Biofarmacja 13:00-14:45 </td>
+
+      </tr>
+      <tr>
+        <th class="active">Aula 3</th>
+        <td colspan="2"></td>
+        <td bgcolor="#ffccff" colspan="8">Wykład Biofarmacja 8:00-11:45 </td>
+        <td colspan="4"></td>
+        <td bgcolor="#ffccff" colspan="8">Wykład Biofarmacja 14:00-17:45 </td>
+
+      </tr>
+      <tr>
+        <th class="active">Aula 4A</th>
+      <td bgcolor="#ffff99" colspan="8">Wykład Biofarmacja 8:00-11:45 </td>
+      <td bgcolor="#ffff99" colspan="8">Wykład Biofarmacja 8:00-11:45 </td>
+      <td bgcolor="#ffff99" colspan="8">Wykład Biofarmacja 8:00-11:45 </td>
+      </tr>
+      <tr>
+        <th class="active">Aula 4B</th>
+        <td colspan="4"></td>
+        <td bgcolor="#ffcc66" colspan="8">Wykład Biofarmacja 8:00-11:45 </td>
+        <td colspan="4"></td>
+        <td bgcolor="#ffcc66" colspan="8">Wykład Biofarmacja 8:00-11:45 </td>
+      </tr>
+      <tr>
+        <th class="active">Aula 45</th>
+        <td colspan="2"></td>
+        <td bgcolor="#ccb3ff" colspan="6">Wykład Biofarmacja 9:00-11:45 </td>
+        <td colspan="4"></td>
+        <td bgcolor="#ccb3ff" colspan="6">Wykład Biofarmacja 13:00-14:45 </td>
+      </tr>
+      <tr>
+        <th class="active">Aula 46</th>
+        <td bgcolor="#98b2e6" colspan="8">Wykład Biofarmacja 8:00-11:45 </td>
+        <td bgcolor="#98b2e6" colspan="6">Wykład Biofarmacja 8:00-11:45 </td>
+        <td bgcolor="#98b2e6" colspan="8">Wykład Biofarmacja 8:00-11:45 </td>
+        <td bgcolor="#98b2e6" colspan="6">Wykład Biofarmacja 8:00-11:45 </td>
+      </tr>
+      <tr align="justify">
+        <th class="active">Aula 213</th>
+        <td colspan="2"></td>
+        <td align="justify" bgcolor="#b3e6cc" colspan="6">Wykład Biofarmacja 9:00-11:45 </td>
+        <td bgcolor="#b3e6cc" colspan="6">Wykład Biofarmacja 13:00-14:45 </td>
+        <td colspan="4"></td>
+      <tr>
+        <th class="active">Aula 214</th>
+        <td colspan="6"> </td>
+        <td bgcolor="#ff80aa" colspan="8">Wykład Biofarmacja 8:00-11:45 </td>
+        <td bgcolor="#ff80aa" colspan="4">Wykład Biofarmacja 12:00-13:45 </td>
+        <td bgcolor="#ff80aa" colspan="6">Wykład Biofarmacja 14:00-15:30</td>
+      </tr>
+    </tbody>
+  </table>
+
+-->
+{% endblock %}
