@@ -1,3 +1,2 @@
-# schedule
-Repozytorium zawierające aplikacje wyświetlającą plan zajęć.
-Aplikacja pobiera dane z pliku xlsx i wyświetla je w formie planu.
+# Schedule
+Python Flask and Google chatrst based application to create a class schedule on the website.
